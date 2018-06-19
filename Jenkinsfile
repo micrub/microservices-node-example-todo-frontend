@@ -1,18 +1,18 @@
 node {
-    
-	
+
+
 
     env.AWS_ECR_LOGIN=true
     def newApp
     def registry = 'gustavoapolinario/microservices-node-todo-frontend'
     def registryCredential = 'dockerhub'
-	
+
 	stage('Git') {
 		git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
 	}
 	stage('Build') {
 		sh 'npm install'
-		sh 'npm run bowerInstall'
+		sh '#npm run bowerInstall'
 	}
 	stage('Test') {
 		sh 'npm test'
@@ -33,5 +33,5 @@ node {
         sh "docker rmi $registry:$BUILD_NUMBER"
         sh "docker rmi $registry:latest"
     }
-    
+
 }
